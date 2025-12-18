@@ -23,14 +23,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Toko Telur Gulung',
-
       theme: ThemeData(
         useMaterial3: true,
         colorSchemeSeed: Colors.blue,
       ),
-
-      home: LoginScreen(),
-
+      initialRoute: '/login',
       routes: {
         '/login': (context) => LoginScreen(),
         '/register': (context) => RegisterScreen(),
@@ -38,8 +35,6 @@ class MyApp extends StatelessWidget {
         '/products': (context) => ProductListScreen(),
         '/orders': (context) => OrderListScreen(),
       },
-
-      // ⬇️ HANDLE ROUTE DENGAN PARAMETER
       onGenerateRoute: (settings) {
         if (settings.name == '/product-detail') {
           final productId = settings.arguments as int;

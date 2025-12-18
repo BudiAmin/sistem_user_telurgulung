@@ -1,28 +1,18 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class OrderService {
-  final String baseUrl = dotenv.env['API_BASE_URL']!;
-
-  /// Ambil token JWT
-  Future<String?> _getToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('token');
-  }
+  final String baseUrl = dotenv.env['BASE_URL']!;
 
   /// =========================
   /// GET - Order milik USER
   /// =========================
   Future<List<dynamic>> getMyOrders() async {
-    final token = await _getToken();
-
     final response = await http.get(
       Uri.parse('$baseUrl/orders'),
       headers: {
-        'Authorization': 'Bearer $token',
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json', // Tanpa JWT
       },
     );
 
@@ -47,13 +37,10 @@ class OrderService {
     bool asin = false,
     bool barbeque = false,
   }) async {
-    final token = await _getToken();
-
     final response = await http.post(
       Uri.parse('$baseUrl/orders'),
       headers: {
-        'Authorization': 'Bearer $token',
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json', // Tanpa JWT
       },
       body: json.encode({
         'product_id': productId,
@@ -79,13 +66,10 @@ class OrderService {
   /// GET - Detail Order USER
   /// =========================
   Future<Map<String, dynamic>> getOrderDetail(int orderId) async {
-    final token = await _getToken();
-
     final response = await http.get(
       Uri.parse('$baseUrl/orders/$orderId'),
       headers: {
-        'Authorization': 'Bearer $token',
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json', // Tanpa JWT
       },
     );
 

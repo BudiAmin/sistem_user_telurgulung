@@ -272,13 +272,10 @@ class _OrderListScreenState extends State<OrderListScreen> {
         color: Colors.transparent,
         child: InkWell(
           onTap: () {
-            Navigator.push(
+            Navigator.pushNamed(
               context,
-              MaterialPageRoute(
-                builder: (context) => OrderDetailScreen(
-                  orderId: order['id'],
-                ),
-              ),
+              '/order-detail',
+              arguments: order['id'],
             );
           },
           borderRadius: BorderRadius.circular(20),
@@ -287,7 +284,6 @@ class _OrderListScreenState extends State<OrderListScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Header - Order ID & Status
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -349,12 +345,8 @@ class _OrderListScreenState extends State<OrderListScreen> {
                   ],
                 ),
                 const SizedBox(height: 16),
-
-                // Divider
                 Divider(color: Colors.grey.shade200),
                 const SizedBox(height: 12),
-
-                // Product Info
                 Row(
                   children: [
                     Container(
@@ -364,7 +356,7 @@ class _OrderListScreenState extends State<OrderListScreen> {
                         gradient: LinearGradient(
                           colors: [
                             Colors.orange.shade300,
-                            Colors.orange.shade500,
+                            Colors.orange.shade50,
                           ],
                         ),
                         borderRadius: BorderRadius.circular(12),
@@ -400,8 +392,6 @@ class _OrderListScreenState extends State<OrderListScreen> {
                     ),
                   ],
                 ),
-
-                // Toppings (if any)
                 if (order['balado'] == true ||
                     order['keju'] == true ||
                     order['pedas'] == true ||
@@ -412,8 +402,7 @@ class _OrderListScreenState extends State<OrderListScreen> {
                     spacing: 6,
                     runSpacing: 6,
                     children: [
-                      if (order['balado'] == true)
-                        _buildToppingTag('Balado'),
+                      if (order['balado'] == true) _buildToppingTag('Balado'),
                       if (order['keju'] == true) _buildToppingTag('Keju'),
                       if (order['pedas'] == true) _buildToppingTag('Pedas'),
                       if (order['asin'] == true) _buildToppingTag('Asin'),
@@ -422,10 +411,7 @@ class _OrderListScreenState extends State<OrderListScreen> {
                     ],
                   ),
                 ],
-
                 const SizedBox(height: 16),
-
-                // Total Price & Action
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

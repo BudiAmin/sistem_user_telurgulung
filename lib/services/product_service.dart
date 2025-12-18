@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class ProductService {
-  final String baseUrl = dotenv.env['API_BASE_URL']!;
+  final String baseUrl = dotenv.env['BASE_URL']!;
 
   /// =========================
   /// GET - List Produk (USER)

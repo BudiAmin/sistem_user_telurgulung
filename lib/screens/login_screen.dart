@@ -31,7 +31,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (response.statusCode == 200) {
         final user = UserModel.fromLoginResponse(result);
-        Navigator.pushReplacementNamed(context, '/', arguments: user);
+
+        if (user.status == 'approved') {
+          Navigator.pushReplacementNamed(context, '/products');
+        } else {
+          Navigator.pushReplacementNamed(context, '/waiting-approval');
+        }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(

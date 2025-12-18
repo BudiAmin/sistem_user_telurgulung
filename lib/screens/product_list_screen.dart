@@ -235,13 +235,10 @@ class _ProductListScreenState extends State<ProductListScreen> {
         color: Colors.transparent,
         child: InkWell(
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ProductDetailScreen(
-                  productId: product['id'],
-                ),
-              ),
+            Navigator.pushNamed(
+              context, 
+              '/product-detail', 
+              arguments: product['id'],
             );
           },
           borderRadius: BorderRadius.circular(20),
@@ -249,7 +246,6 @@ class _ProductListScreenState extends State<ProductListScreen> {
             padding: const EdgeInsets.all(16),
             child: Row(
               children: [
-                // Product Image
                 Container(
                   width: 100,
                   height: 100,
@@ -269,8 +265,6 @@ class _ProductListScreenState extends State<ProductListScreen> {
                   ),
                 ),
                 const SizedBox(width: 16),
-
-                // Product Info
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
